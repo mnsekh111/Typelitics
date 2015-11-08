@@ -23,8 +23,10 @@
             android:name=".SettingsActivity"
             android:label="@string/settings" >
         </activity>
-
-
+        <activity
+            android:name=".RaceActivity"
+            android:label="@string/title_activity_race" >
+        </activity>
     </application>
 
 </manifest>

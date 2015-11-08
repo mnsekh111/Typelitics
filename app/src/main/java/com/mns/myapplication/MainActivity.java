@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
             int id = v.getId();
             Intent intent =null;
             if(id == R.id.btnNewRace){
+                intent = new Intent(getBaseContext(),RaceActivity.class);
             }else if(id == R.id.btnSettings){
                 intent = new Intent(getBaseContext(),SettingsActivity.class);
             }else if(id == R.id.btnPractice){

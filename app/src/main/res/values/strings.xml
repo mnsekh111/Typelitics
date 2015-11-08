@@ -27,4 +27,10 @@
     <string name="auto_correct">Auto Correct</string>
     <string name="suggest">Suggestion</string>
     <string name="keyboards">Keyboards</string>
+    <string name="title_activity_race">RaceActivity</string>
+
+    <string name="sample_passage">Clifford Jackson, or Abshu, as he preferred to be
+known in the streets, had committed himself several
+years ago to use his talents as a playwright to broaden
+the horizons for the young, gifted, and black</string>
 </resources>
