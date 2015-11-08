@@ -1,9 +1,59 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/llOnlineStats"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/primary"></LinearLayout>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llOnlineStats"
+        android:layout_centerHorizontal="true"
+        android:columnCount="2">
+
+
+        <Button
+            android:id="@+id/btnNewRace"
+            android:layout_width="@dimen/main_menu_circle"
+            android:layout_height="@dimen/main_menu_circle"
+            android:background="@drawable/round_button"
+            android:text="@string/new_race" />
+
+
+        <Button
+            android:id="@+id/btnPractice"
+            android:layout_width="@dimen/main_menu_circle"
+            android:layout_height="@dimen/main_menu_circle"
+            android:background="@drawable/round_button"
+            android:text="@string/practice" />
+
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="@dimen/main_menu_circle"
+            android:layout_height="@dimen/main_menu_circle"
+            android:background="@drawable/round_button"
+            android:layout_below="@+id/btnSettings"
+            android:text="@string/settings" />
+
+        <Button
+            android:id="@+id/btnLeaderboard"
+            android:layout_width="@dimen/main_menu_circle"
+            android:layout_height="@dimen/main_menu_circle"
+            android:background="@drawable/round_button"
+            android:text="@string/leader_board" />
+
+    </GridLayout>
 
 
 </RelativeLayout>
