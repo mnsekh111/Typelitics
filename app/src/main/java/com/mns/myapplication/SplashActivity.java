@@ -1,33 +1,85 @@
 package com.mns.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class SplashActivity extends Activity {
+
+    TextView tvTitle;
+    ProgressBar pbLoading;
+
+    private boolean isBackPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        tvTitle = (TextView) findViewById(R.id.tvAppName);
+        pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
+        pbLoading.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        new LoaderTask().execute();
+    }
+
+    private class LoaderTask extends AsyncTask<Void, Integer, Void> {
+        public LoaderTask() {
+            super();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            android.util.Log.i("SPLASH", "In Update");
+            pbLoading.setProgress(values[0]);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            for (int i = 1; i <= 10; i++) {
+                android.util.Log.i("SPLASH", "In background");
+                try {
+                    if (isBackPressed) {
+                        break;
+                    }
+                    Thread.sleep(100);
+                    publishProgress(i * 10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        isBackPressed = true;
+        super.onBackPressed();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_splash, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
         }
