@@ -1,17 +1,57 @@
 package com.mns.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
+    Button btnNewRace,btnSettings,btnPractice,btnLb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initViews();
     }
+
+    private void initViews(){
+        btnNewRace = (Button) findViewById(R.id.btnNewRace);
+        btnPractice =  (Button) findViewById(R.id.btnPractice);
+        btnSettings = (Button) findViewById(R.id.btnSettings);
+        btnLb = (Button) findViewById(R.id.btnLeaderboard);
+        btnClickListener = new ButtonClickListener();
+        btnSettings.setOnClickListener(btnClickListener);
+        btnPractice.setOnClickListener(btnClickListener);
+        btnNewRace.setOnClickListener(btnClickListener);
+        btnLb.setOnClickListener(btnClickListener);
+
+    }
+
+    private ButtonClickListener btnClickListener;
+    private class ButtonClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            int id = v.getId();
+            Intent intent =null;
+            if(id == R.id.btnNewRace){
+            }else if(id == R.id.btnSettings){
+                intent = new Intent(getBaseContext(),SettingsActivity.class);
+            }else if(id == R.id.btnPractice){
+
+            }else if(id ==R.id.btnLeaderboard){
+
+            }
+
+            if(intent !=null){
+                startActivity(intent);
+            }
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
