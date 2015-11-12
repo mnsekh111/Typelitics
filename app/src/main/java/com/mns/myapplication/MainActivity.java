@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
             }else if(id == R.id.btnSettings){
                 intent = new Intent(getBaseContext(),SettingsActivity.class);
             }else if(id == R.id.btnPractice){
-
+                intent = new Intent(getBaseContext(),ResultActivity.class);
             }else if(id ==R.id.btnLeaderboard){
 
             }
