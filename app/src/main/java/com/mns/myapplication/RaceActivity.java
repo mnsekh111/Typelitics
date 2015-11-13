@@ -8,13 +8,18 @@ import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class RaceActivity extends Activity {
 
     private EditText etInput;
     private TextView tvPassage, tvWpm, tvPosition, tvAcc;
+    private RelativeLayout rlRace;
 
 
     private volatile int timeElapsed = 0;
@@ -41,7 +46,9 @@ public class RaceActivity extends Activity {
         tvPosition = (TextView) findViewById(R.id.tvPosition);
         tvAcc = (TextView) findViewById(R.id.tvAcc);
 
+        rlRace = (RelativeLayout) findViewById(R.id.rlRace);
         setPassage("My name is Sekharan. I'm a good boy.");
+        addProgressBars(4);
     }
 
 
@@ -76,8 +83,7 @@ public class RaceActivity extends Activity {
                         spanText.setSpan(new BackgroundColorSpan(0xFFFFFF00), start, start + passageWords[currentWord].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         tvPassage.setText(spanText);
                         etInput.setTextColor(Color.BLACK);
-                    }
-                    else{
+                    } else {
                         //Show the complete activity
                     }
                 } else {
@@ -87,6 +93,29 @@ public class RaceActivity extends Activity {
         }
     };
 
+
+    private void addProgressBars(int n) {
+        if (rlRace != null) {
+
+            LinearLayout ll = (LinearLayout)((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress,null);
+            ll.setTag("D" + 0);
+            ll.setId(View.generateViewId());
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.ABOVE, R.id.cvPassage);
+            rlRace.addView(ll, params);
+
+            for(int i=1;i<n;i++){
+                ll = (LinearLayout)((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress,null);
+                ll.setId(View.generateViewId());
+                ll.setTag("D"+i);
+                params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.ABOVE,rlRace.findViewWithTag("D"+(i-1)).getId());
+                params.setMargins(0,0,0,5);
+                rlRace.addView(ll, params);
+            }
+
+        }
+    }
 
     private Thread mTimerThread = new Thread(new Runnable() {
         @Override
