@@ -37,10 +37,10 @@
                     android:id="@+id/tvWPM"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
+                    android:layout_margin="@dimen/margin_user_stats"
                     android:gravity="center_horizontal"
                     android:text="0"
-                    android:textSize="40dp" />
+                    android:textSize="@dimen/text_size_user_stats" />
 
             </LinearLayout>
 
@@ -61,10 +61,10 @@
                     android:id="@+id/tvPosition"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
+                    android:layout_margin="@dimen/margin_user_stats"
                     android:gravity="center_horizontal"
                     android:text="0"
-                    android:textSize="40dp" />
+                    android:textSize="@dimen/text_size_user_stats" />
 
             </LinearLayout>
 
@@ -85,10 +85,10 @@
                     android:id="@+id/tvAcc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
+                    android:layout_margin="@dimen/margin_user_stats"
                     android:gravity="center_horizontal"
                     android:text="0%"
-                    android:textSize="40dp" />
+                    android:textSize="@dimen/text_size_user_stats" />
 
             </LinearLayout>
         </LinearLayout>
