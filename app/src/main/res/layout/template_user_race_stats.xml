@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="100"
+                    android:text="0"
                     android:textSize="40dp" />
 
             </LinearLayout>
@@ -63,7 +63,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="2"
+                    android:text="0"
                     android:textSize="40dp" />
 
             </LinearLayout>
@@ -87,7 +87,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="98%"
+                    android:text="0%"
                     android:textSize="40dp" />
 
             </LinearLayout>

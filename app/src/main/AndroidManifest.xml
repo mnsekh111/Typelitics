@@ -30,6 +30,12 @@
             android:theme="@android:style/Theme.Material.Light.NoActionBar" />
         <activity android:name=".ResultActivity" >
         </activity>
+
+        <service
+            android:name=".services.NetworkService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>

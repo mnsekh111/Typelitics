@@ -1,6 +1,9 @@
 package com.mns.myapplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,6 +27,8 @@ public class RaceActivity extends Activity {
 
     private volatile int timeElapsed = 0;
     private int currentWord = 0;
+    private int mistakes = 0;
+    private int participants = -1;
     private boolean hasCompleted = false;
     private String[] passageWords;
     private String passage;
@@ -47,8 +52,22 @@ public class RaceActivity extends Activity {
         tvAcc = (TextView) findViewById(R.id.tvAcc);
 
         rlRace = (RelativeLayout) findViewById(R.id.rlRace);
-        setPassage("My name is Sekharan. I'm a good boy.");
-        addProgressBars(4);
+
+        if (participants == -1) {
+            ProgressDialog pd = new ProgressDialog(RaceActivity.this);
+            pd.setCancelable(false);
+            pd.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    RaceActivity.this.finish();
+                }
+            });
+            pd.setMessage(getString(R.string.progress_body));
+            pd.show();
+        }
+        setPassage(getString(R.string.sample_passage));
+        setParticipants(5);
     }
 
 
@@ -83,10 +102,12 @@ public class RaceActivity extends Activity {
                         spanText.setSpan(new BackgroundColorSpan(0xFFFFFF00), start, start + passageWords[currentWord].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         tvPassage.setText(spanText);
                         etInput.setTextColor(Color.BLACK);
+
                     } else {
                         //Show the complete activity
                     }
                 } else {
+                    mistakes++;
                     etInput.setTextColor(Color.RED);
                 }
             }
@@ -94,23 +115,23 @@ public class RaceActivity extends Activity {
     };
 
 
-    private void addProgressBars(int n) {
+    private void addProgressBars() {
         if (rlRace != null) {
 
-            LinearLayout ll = (LinearLayout)((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress,null);
+            LinearLayout ll = (LinearLayout) ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress, null);
             ll.setTag("D" + 0);
             ll.setId(View.generateViewId());
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.ABOVE, R.id.cvPassage);
             rlRace.addView(ll, params);
 
-            for(int i=1;i<n;i++){
-                ll = (LinearLayout)((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress,null);
+            for (int i = 1; i < participants; i++) {
+                ll = (LinearLayout) ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress, null);
                 ll.setId(View.generateViewId());
-                ll.setTag("D"+i);
+                ll.setTag("D" + i);
                 params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                params.addRule(RelativeLayout.ABOVE,rlRace.findViewWithTag("D"+(i-1)).getId());
-                params.setMargins(0,0,0,5);
+                params.addRule(RelativeLayout.ABOVE, rlRace.findViewWithTag("D" + (i - 1)).getId());
+                params.setMargins(0, 0, 0, 5);
                 rlRace.addView(ll, params);
             }
 
@@ -125,6 +146,7 @@ public class RaceActivity extends Activity {
                 while (!hasCompleted) {
                     Thread.sleep(1000);
                     timeElapsed++;
+                    updateUserStats();
                 }
             } catch (InterruptedException ie) {
 
@@ -142,5 +164,53 @@ public class RaceActivity extends Activity {
                     , passageWords[currentWord].length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             tvPassage.setText(spanText);
         }
+    }
+
+    private void setParticipants(int n) {
+        this.participants = n;
+        addProgressBars();
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.quit)
+                .setMessage(R.string.quit_mess)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        RaceActivity.this.finish();
+                    }
+
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
+    }
+
+    private void updateUserStats() {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    tvWpm.setText(""+currentWord * 60 / timeElapsed);
+                    tvAcc.setText(""+currentWord * 100 / (currentWord + mistakes));
+                } catch (RuntimeException re) {
+                    Log.i("Update","Division By Zero");
+                }
+            }
+        });
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mTimerThread != null) {
+            mTimerThread.interrupt();
+        }
+        super.onDestroy();
     }
 }
