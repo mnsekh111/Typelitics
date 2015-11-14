@@ -1,6 +1,7 @@
 package com.mns.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,13 @@ import android.widget.LinearLayout;
 
 public class ResultActivity extends Activity {
 
+    int participants = -1;
     private LinearLayout llResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent i = getIntent();
+        participants = i.getIntExtra("Participant",2);
         setContentView(R.layout.activity_result);
         initViews();
     }
