@@ -5,22 +5,22 @@
     <PreferenceCategory android:title="Assists" >
     <CheckBoxPreference
         android:defaultValue="false"
-        android:key="swipe"
-        android:summary="Allow swipe settings in default keyboards"
-        android:title="@string/swipe" >
+        android:key="auto_complete"
+        android:summary="@string/auto_complete_summary"
+        android:title="@string/auto_complete" >
     </CheckBoxPreference>
 
     <CheckBoxPreference
         android:defaultValue="false"
-        android:key="autocorrect"
-        android:summary="Turn on Auto correct in default keyboards"
+        android:key="auto_correct"
+        android:summary="@string/auto_correct_summary"
         android:title="@string/auto_correct" >
     </CheckBoxPreference>
 
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="suggest"
-        android:summary="Give suggestion while typing"
+        android:summary="@string/suggest_summary"
         android:title="@string/suggest" >
     </CheckBoxPreference>
 
@@ -29,11 +29,11 @@
 
     <PreferenceCategory android:title="Keyboards" >
     <ListPreference
-        android:key="prefSyncFrequency"
+        android:key="keyboard"
         android:entries="@array/keyboards"
-        android:summary="Select the type of keyboard you want to use during the race"
+        android:summary="@string/keyboard_summary"
         android:entryValues="@array/keyboardsVals"
-        android:title="@string/keyboards" />
+        android:title="@string/keyboard" />
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -23,12 +23,17 @@
     <string name="practice">Practice</string>
 
     <string name="setting">Settings</string>
-    <string name="swipe">Swipe</string>
+    <string name="auto_complete">Auto Complete</string>
     <string name="auto_correct">Auto Correct</string>
     <string name="suggest">Suggestion</string>
-    <string name="keyboards">Keyboards</string>
-    <string name="title_activity_race">RaceActivity</string>
+    <string name="keyboard">Keyboards</string>
 
+    <string name="auto_complete_summary">Allow text to be auto completed in default keyboards</string>
+    <string name="auto_correct_summary">Turn on Auto correct in default keyboards</string>
+    <string name="suggest_summary">Give suggestion while typing</string>
+    <string name="keyboard_summary">Select the type of keyboard you want to use during the race</string>
+
+    <string name="title_activity_race">RaceActivity</string>
     <string name="sample_passage">Clifford Jackson, or Abshu, as he preferred to be
 known in the streets, had committed himself several
 years ago to use his talents as a playwright to broaden
