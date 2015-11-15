@@ -22,7 +22,7 @@ public class RaceActivity extends Activity {
 
     private EditText etInput;
     private TextView tvPassage, tvWpm, tvPosition, tvAcc;
-    private RelativeLayout rlRace;
+    private LinearLayout llRace;
 
 
     private volatile int timeElapsed = 0;
@@ -38,7 +38,7 @@ public class RaceActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_race);
+        setContentView(R.layout.activity_race2);
         initViews();
     }
 
@@ -51,23 +51,23 @@ public class RaceActivity extends Activity {
         tvPosition = (TextView) findViewById(R.id.tvPosition);
         tvAcc = (TextView) findViewById(R.id.tvAcc);
 
-        rlRace = (RelativeLayout) findViewById(R.id.rlRace);
+        llRace = (LinearLayout) findViewById(R.id.llRace);
 
-        if (participants == -1) {
-            ProgressDialog pd = new ProgressDialog(RaceActivity.this);
-            pd.setCancelable(false);
-            pd.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    RaceActivity.this.finish();
-                }
-            });
-            pd.setMessage(getString(R.string.progress_body));
-            pd.show();
-        }
+//        if (participants == -1) {
+//            ProgressDialog pd = new ProgressDialog(RaceActivity.this);
+//            pd.setCancelable(false);
+//            pd.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    dialog.dismiss();
+//                    RaceActivity.this.finish();
+//                }
+//            });
+//            pd.setMessage(getString(R.string.progress_body));
+//            pd.show();
+//        }
         setPassage(getString(R.string.sample_passage));
-        setParticipants(5);
+        setParticipants(15);
     }
 
 
@@ -116,23 +116,14 @@ public class RaceActivity extends Activity {
 
 
     private void addProgressBars() {
-        if (rlRace != null) {
-
-            LinearLayout ll = (LinearLayout) ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress, null);
-            ll.setTag("D" + 0);
-            ll.setId(View.generateViewId());
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            params.addRule(RelativeLayout.ABOVE, R.id.cvPassage);
-            rlRace.addView(ll, params);
-
-            for (int i = 1; i < participants; i++) {
-                ll = (LinearLayout) ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress, null);
-                ll.setId(View.generateViewId());
+        if (llRace != null) {
+            for (int i = 0; i < participants; i++) {
+                LinearLayout ll = (LinearLayout) ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress, null);
                 ll.setTag("D" + i);
-                params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                params.addRule(RelativeLayout.ABOVE, rlRace.findViewWithTag("D" + (i - 1)).getId());
-                params.setMargins(0, 0, 0, 5);
-                rlRace.addView(ll, params);
+                ll.setId(View.generateViewId());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(0,0,0,5);
+                llRace.addView(ll, params);
             }
 
         }
