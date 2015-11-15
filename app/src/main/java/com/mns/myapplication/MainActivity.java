@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
             }else if(id == R.id.btnPractice){
                 intent = new Intent(getBaseContext(),ResultActivity.class);
             }else if(id ==R.id.btnLeaderboard){
-
+                intent = new Intent(getBaseContext(),LeaderboardActivity.class);
             }
 
             if(intent !=null){

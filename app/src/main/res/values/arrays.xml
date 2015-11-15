@@ -12,4 +12,11 @@
         <item name="custom">2</item>
     </string-array>
 
+    <array name="indicator_colors">
+        <item>@color/primary</item>
+        <item>@color/primary</item>
+        <item>@color/primary</item>
+        <item>@color/primary</item>
+    </array>
+
 </resources>
