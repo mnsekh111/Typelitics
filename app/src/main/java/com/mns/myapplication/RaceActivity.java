@@ -2,10 +2,10 @@ package com.mns.myapplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextWatcher;
@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class RaceActivity extends Activity {
@@ -23,7 +22,7 @@ public class RaceActivity extends Activity {
     private EditText etInput;
     private TextView tvPassage, tvWpm, tvPosition, tvAcc;
     private LinearLayout llRace;
-
+    private CardView cvPassage;
 
     private volatile int timeElapsed = 0;
     private int currentWord = 0;
@@ -51,6 +50,7 @@ public class RaceActivity extends Activity {
         tvPosition = (TextView) findViewById(R.id.tvPosition);
         tvAcc = (TextView) findViewById(R.id.tvAcc);
 
+        cvPassage = (CardView) findViewById(R.id.cvPassage);
         llRace = (LinearLayout) findViewById(R.id.llRace);
 
 //        if (participants == -1) {
@@ -67,7 +67,7 @@ public class RaceActivity extends Activity {
 //            pd.show();
 //        }
         setPassage(getString(R.string.sample_passage));
-        setParticipants(15);
+        setParticipants(4);
     }
 
 
@@ -79,7 +79,7 @@ public class RaceActivity extends Activity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (!mTimerThread.isAlive()) {
+            if (!mTimerThread.isAlive() && !mTimerThread.isInterrupted() ) {
                 mTimerThread.start();
             }
         }
@@ -104,7 +104,15 @@ public class RaceActivity extends Activity {
                         etInput.setTextColor(Color.BLACK);
 
                     } else {
-                        //Show the complete activity
+                        if(mTimerThread != null && mTimerThread.isAlive())
+                            mTimerThread.interrupt();
+                        //startActivity(new Intent(getBaseContext(),ResultActivity.class));
+                        etInput.removeTextChangedListener(this);
+                        cvPassage.setBackgroundColor(getResources().getColor(R.color.primary_dark));
+                        tvPassage.setTextColor(getResources().getColor(android.R.color.white));
+                        tvPassage.setTextSize(30);
+                        tvPassage.setText("Done !");
+
                     }
                 } else {
                     mistakes++;
@@ -194,6 +202,10 @@ public class RaceActivity extends Activity {
                 }
             }
         });
+
+    }
+
+    private void dummyRacers(){
 
     }
 
