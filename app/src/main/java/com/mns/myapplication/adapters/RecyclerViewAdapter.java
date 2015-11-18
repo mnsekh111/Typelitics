@@ -9,17 +9,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mns.myapplication.R;
-import com.mns.myapplication.pojo.FeedItem;
+import com.mns.myapplication.pojo.LeaderBoardItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.CustomViewHolder> {
-    private List<FeedItem> feedItemList;
+    private List<LeaderBoardItem> leaderBoardItemList;
     private Context mContext;
 
-    public RecyclerViewAdapter(Context context, List<FeedItem> feedItemList) {
-        this.feedItemList = feedItemList;
+    public RecyclerViewAdapter(Context context, List<LeaderBoardItem> leaderBoardItemList) {
+        this.leaderBoardItemList = leaderBoardItemList;
         this.mContext = context;
     }
 
@@ -33,21 +33,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(CustomViewHolder customViewHolder, int i) {
-        FeedItem feedItem = feedItemList.get(i);
+        LeaderBoardItem leaderBoardItem = leaderBoardItemList.get(i);
 
         //Download image using picasso library
-        Picasso.with(mContext).load(feedItem.getThumbnail())
-                .error(android.R.drawable.alert_light_frame)
-                .placeholder(android.R.drawable.bottom_bar)
+        Picasso.with(mContext).load(leaderBoardItem.getProfilePicUrl())
                 .into(customViewHolder.imageView);
 
         //Setting text view title
-        customViewHolder.textView.setText(feedItem.getTitle());
+        customViewHolder.textView.setText(leaderBoardItem.getName());
     }
 
     @Override
     public int getItemCount() {
-        return (null != feedItemList ? feedItemList.size() : 0);
+        return (null != leaderBoardItemList ? leaderBoardItemList.size() : 0);
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {

@@ -9,15 +9,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.mns.myapplication.LeaderboardActivity">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <github.chenupt.springindicator.viewpager.ScrollerViewPager
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <github.chenupt.springindicator.SpringIndicator xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/indicator"
@@ -28,6 +23,12 @@
             app:siSelectedTextColor="@android:color/white"
             app:siTextColor="@color/primary_dark"
             app:siTextSize="18sp" />
-    </FrameLayout>
+
+        <github.chenupt.springindicator.viewpager.ScrollerViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+    </LinearLayout>
 
 </RelativeLayout>

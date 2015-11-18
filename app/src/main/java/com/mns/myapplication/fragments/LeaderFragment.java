@@ -28,9 +28,8 @@ import android.widget.ImageView;
 
 import com.mns.myapplication.R;
 import com.mns.myapplication.adapters.RecyclerViewAdapter;
-import com.mns.myapplication.pojo.FeedItem;
+import com.mns.myapplication.pojo.LeaderBoardItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +41,7 @@ public class LeaderFragment extends Fragment{
     private int bgRes;
     private ImageView imageView;
 
-    private List<FeedItem> feedsList;
+    private List<LeaderBoardItem> feedsList;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter adapter;
 
@@ -54,7 +53,7 @@ public class LeaderFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_Leader, container, false);
+        View view = inflater.inflate(R.layout.fragment_leader, container, false);
 
         return view;
     }
@@ -68,12 +67,7 @@ public class LeaderFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        feedsList = new ArrayList<>();
-        feedsList.add(new FeedItem());
-        feedsList.add(new FeedItem());
-        feedsList.add(new FeedItem());
-        feedsList.add(new FeedItem());
-        feedsList.add(new FeedItem());
+        feedsList = LeaderBoardItem.getSamLeaderBoardItems();
 
         mRecyclerView = (RecyclerView) getView().findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
