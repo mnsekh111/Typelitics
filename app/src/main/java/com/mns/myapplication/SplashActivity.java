@@ -2,19 +2,16 @@ package com.mns.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.github.lzyzsd.circleprogress.CircleProgress;
 
 public class SplashActivity extends Activity {
 
     TextView tvTitle;
-    ProgressBar pbLoading;
+    CircleProgress pbLoading;
 
     private boolean isBackPressed = false;
 
@@ -23,8 +20,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         tvTitle = (TextView) findViewById(R.id.tvAppName);
-        pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
-        pbLoading.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        pbLoading = (CircleProgress) findViewById(R.id.pbLoading);
         new LoaderTask().execute();
     }
 
@@ -38,25 +34,24 @@ public class SplashActivity extends Activity {
             super.onPostExecute(aVoid);
             Intent intent = new Intent(SplashActivity.this,MainActivity.class);
             startActivity(intent);
-            finish();;
+            finish();
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            android.util.Log.i("SPLASH", "In Update");
             pbLoading.setProgress(values[0]);
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= 20; i++) {
                 android.util.Log.i("SPLASH", "In background");
                 try {
                     if (isBackPressed) {
                         break;
                     }
                     Thread.sleep(100);
-                    publishProgress(i * 10);
+                    publishProgress(i * 5);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
