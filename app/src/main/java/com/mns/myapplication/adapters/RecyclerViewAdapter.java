@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mns.myapplication.R;
@@ -13,6 +12,8 @@ import com.mns.myapplication.pojo.LeaderBoardItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.CustomViewHolder> {
     private List<LeaderBoardItem> leaderBoardItemList;
@@ -49,12 +50,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
-        protected ImageView imageView;
+        protected CircleImageView imageView;
         protected TextView textView;
 
         public CustomViewHolder(View view) {
             super(view);
-            this.imageView = (ImageView) view.findViewById(R.id.thumbnail);
+            this.imageView = (CircleImageView) view.findViewById(R.id.profile_image);
             this.textView = (TextView) view.findViewById(R.id.title);
         }
     }
