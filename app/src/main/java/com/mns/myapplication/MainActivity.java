@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-    Button btnNewRace,btnSettings,btnPractice,btnLb;
+    Button btnNewRace,btnSettings,btnPractice,btnLb,btnStats;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,11 +23,15 @@ public class MainActivity extends Activity {
         btnPractice =  (Button) findViewById(R.id.btnPractice);
         btnSettings = (Button) findViewById(R.id.btnSettings);
         btnLb = (Button) findViewById(R.id.btnLeaderboard);
+        btnStats = (Button) findViewById(R.id.btnStats);
+
         btnClickListener = new ButtonClickListener();
+
         btnSettings.setOnClickListener(btnClickListener);
         btnPractice.setOnClickListener(btnClickListener);
         btnNewRace.setOnClickListener(btnClickListener);
         btnLb.setOnClickListener(btnClickListener);
+        btnStats.setOnClickListener(btnClickListener);
 
     }
 
@@ -45,6 +49,8 @@ public class MainActivity extends Activity {
                 intent = new Intent(getBaseContext(),ResultActivity.class);
             }else if(id ==R.id.btnLeaderboard){
                 intent = new Intent(getBaseContext(),LeaderboardActivity.class);
+            }else if(id == R.id.btnStats){
+                intent = new Intent(getBaseContext(),StatsActivity.class);
             }
 
             if(intent !=null){
