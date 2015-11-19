@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/activity_vertical_margin">
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cvWPM"
@@ -34,14 +35,28 @@
                     android:gravity="center_horizontal"
                     android:text="WPM" />
 
-                <TextView
-                    android:id="@+id/tvWPM"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/margin_user_stats"
                     android:gravity="center_horizontal"
-                    android:text="0"
-                    android:textSize="@dimen/text_size_user_stats" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvWPM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_user_stats"
+                        android:text="0"
+                        android:textSize="@dimen/text_size_user_stats" />
+
+                    <ImageView
+                        android:id="@+id/ivWPMUpDown"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/margin_user_stats"
+                        android:src="@drawable/arrow_up" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -58,14 +73,29 @@
                     android:gravity="center_horizontal"
                     android:text="Position" />
 
-                <TextView
-                    android:id="@+id/tvPosition"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/margin_user_stats"
                     android:gravity="center_horizontal"
-                    android:text="0"
-                    android:textSize="@dimen/text_size_user_stats" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvPosition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/margin_user_stats"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="@dimen/text_size_user_stats" />
+
+                    <ImageView
+                        android:id="@+id/ivPositionUpDown"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/margin_user_stats"
+                        android:src="@drawable/arrow_up" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -82,14 +112,29 @@
                     android:gravity="center_horizontal"
                     android:text="Accuracy" />
 
-                <TextView
-                    android:id="@+id/tvAcc"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/margin_user_stats"
                     android:gravity="center_horizontal"
-                    android:text="0%"
-                    android:textSize="@dimen/text_size_user_stats" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvAcc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/margin_user_stats"
+                        android:gravity="center_horizontal"
+                        android:text="0%"
+                        android:textSize="@dimen/text_size_user_stats" />
+
+                    <ImageView
+                        android:id="@+id/ivAccUpDown"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/margin_user_stats"
+                        android:src="@drawable/arrow_up" />
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
