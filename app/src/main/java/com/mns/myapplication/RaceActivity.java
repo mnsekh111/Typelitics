@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class RaceActivity extends Activity {
 
     private EditText etInput;
@@ -33,7 +35,7 @@ public class RaceActivity extends Activity {
     private String passage;
     private Spannable spanText = null;
 
-
+    private ArrayList<LinearLayout> partProgress = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,6 +134,7 @@ public class RaceActivity extends Activity {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(0,0,0,5);
                 llRace.addView(ll, params);
+                partProgress.add(ll);
             }
 
         }
@@ -152,6 +155,7 @@ public class RaceActivity extends Activity {
             }
         }
     });
+
 
     private void setPassage(String str) {
         if (tvPassage != null) {
@@ -195,15 +199,16 @@ public class RaceActivity extends Activity {
             @Override
             public void run() {
                 try {
-                    tvWpm.setText(""+currentWord * 60 / timeElapsed);
-                    tvAcc.setText(""+currentWord * 100 / (currentWord + mistakes));
+                    tvWpm.setText("" + currentWord * 60 / timeElapsed);
+                    tvAcc.setText("" + currentWord * 100 / (currentWord + mistakes));
                 } catch (RuntimeException re) {
-                    Log.i("Update","Division By Zero");
+                    Log.i("Update", "Division By Zero");
                 }
             }
         });
 
     }
+
 
     private void dummyRacers(){
 
