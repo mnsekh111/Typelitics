@@ -8,13 +8,14 @@
     <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/rcpb"
         app:rcIconPadding="2dp"
-        app:rcIconSize="25dp"
+        app:rcIconSize="35dp"
         app:rcIconSrc="@android:drawable/stat_sys_headset"
         app:rcBackgroundPadding="5dp"
         app:rcBackgroundColor="@android:color/white"
         app:rcProgressColor="@android:color/black"
-        app:rcProgress="50"
+        app:rcProgress="0"
         app:rcMax="100"  />
 
 </LinearLayout>

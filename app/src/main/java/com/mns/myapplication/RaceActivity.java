@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.Spannable;
@@ -17,7 +19,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class RaceActivity extends Activity {
 
@@ -36,6 +41,9 @@ public class RaceActivity extends Activity {
     private Spannable spanText = null;
 
     private ArrayList<LinearLayout> partProgress = new ArrayList<>();
+    private ArrayList<Integer> partProgressColor = new ArrayList<>();
+    private Random random = new Random();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +77,7 @@ public class RaceActivity extends Activity {
 //            pd.show();
 //        }
         setPassage(getString(R.string.sample_passage));
-        setParticipants(4);
+        setParticipants(5);
     }
 
 
@@ -83,6 +91,7 @@ public class RaceActivity extends Activity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (!mTimerThread.isAlive() && !mTimerThread.isInterrupted() ) {
                 mTimerThread.start();
+                mDummyUpdaterThread.start();
             }
         }
 
@@ -115,6 +124,8 @@ public class RaceActivity extends Activity {
                         tvPassage.setTextSize(30);
                         tvPassage.setText("Done !");
 
+                        hasCompleted = true;
+
                     }
                 } else {
                     mistakes++;
@@ -129,7 +140,6 @@ public class RaceActivity extends Activity {
         if (llRace != null) {
             for (int i = 0; i < participants; i++) {
                 LinearLayout ll = (LinearLayout) ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress, null);
-                ll.setTag("D" + i);
                 ll.setId(View.generateViewId());
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.setMargins(0,0,0,5);
@@ -172,6 +182,13 @@ public class RaceActivity extends Activity {
     private void setParticipants(int n) {
         this.participants = n;
         addProgressBars();
+
+        partProgressColor.add(Color.BLUE);
+        partProgressColor.add(Color.CYAN);
+        partProgressColor.add(Color.GRAY);
+        partProgressColor.add(Color.GREEN);
+        partProgressColor.add(Color.MAGENTA);
+
     }
 
     @Override
@@ -210,15 +227,38 @@ public class RaceActivity extends Activity {
     }
 
 
-    private void dummyRacers(){
+    private Thread mDummyUpdaterThread = new Thread(){
+        @Override
+        public void run() {
+            while(!hasCompleted){
 
-    }
+                try {
+                    Thread.sleep(1000);
+                    mProgressUpdater.sendMessage(Message.obtain());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+
+    private Handler mProgressUpdater = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            for (int i = 0; i < partProgress.size(); i++) {
+                IconRoundCornerProgressBar rpb = (IconRoundCornerProgressBar) partProgress.get(i).findViewById(R.id.rcpb);
+                rpb.setProgress(rpb.getProgress() + random.nextInt(3)+1);
+                rpb.setProgressColor(partProgressColor.get(i));
+            }
+        }
+    };
 
     @Override
     protected void onDestroy() {
         if (mTimerThread != null) {
             mTimerThread.interrupt();
         }
+
         super.onDestroy();
     }
 }
