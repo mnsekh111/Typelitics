@@ -32,10 +32,10 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     public class Settings {
-        boolean auto_correct;
-        boolean auto_complete;
-        boolean suggest;
-        int keyboard;
+        public boolean auto_correct;
+        public boolean auto_complete;
+        public boolean suggest;
+        public int keyboard;
     }
 
     private void logPrefs(){
