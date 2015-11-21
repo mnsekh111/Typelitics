@@ -2,10 +2,8 @@ package com.mns.myapplication;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.text.InputType;
 import android.util.Log;
 
 public class SettingsActivity extends PreferenceActivity {
@@ -33,7 +31,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     }
 
-    private class Settings {
+    public class Settings {
         boolean auto_correct;
         boolean auto_complete;
         boolean suggest;
