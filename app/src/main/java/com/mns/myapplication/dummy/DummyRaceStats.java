@@ -17,7 +17,7 @@ public class DummyRaceStats {
     private Random random = new Random();
 
     public int raceId;
-    public SettingsActivity.Settings raceSettings; //wrong to store the entire settings (only id)
+    public SettingsActivity.Settings raceSettings = new SettingsActivity.Settings(); //wrong to store the entire settings (only id)
     public Map<DummyUser,DummyStat> racers = new HashMap<>(MAX_RACERS); //wrong to store the entire races (only id)
 
     public DummyRaceStats(){
@@ -36,12 +36,13 @@ public class DummyRaceStats {
 
     public static ArrayList<DummyRaceStats> getList(){
         if(list == null){
+            list = new ArrayList<>();
             for(int i=0;i<100;i++){
                 list.add(new DummyRaceStats());
             }
         }
 
-        return null;
+        return list;
     }
 
     public void add(DummyRaceStats ds){

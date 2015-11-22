@@ -31,7 +31,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     }
 
-    public class Settings {
+    public static class Settings {
         public boolean auto_correct;
         public boolean auto_complete;
         public boolean suggest;

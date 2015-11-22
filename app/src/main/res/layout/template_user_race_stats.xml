@@ -14,131 +14,145 @@
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="4dp"
         card_view:cardElevation="4dp"
-        card_view:contentPadding="10dp">
+        card_view:contentPadding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/arrow_down"
+                android:layout_gravity="center_vertical"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvWPMHead"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="WPM" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvWPM"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvWPMHead"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_user_stats"
-                        android:text="0"
-                        android:textSize="@dimen/text_size_user_stats" />
+                        android:gravity="center_horizontal"
+                        android:text="WPM" />
 
-                    <ImageView
-                        android:id="@+id/ivWPMUpDown"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="@dimen/margin_user_stats"
-                        android:src="@drawable/arrow_up" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvWPM"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_user_stats"
+                            android:text="0"
+                            android:textSize="@dimen/text_size_user_stats" />
+
+                        <ImageView
+                            android:id="@+id/ivWPMUpDown"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/margin_user_stats"
+                            android:src="@drawable/arrow_up" />
+                    </LinearLayout>
+
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvPositionHead"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Position" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvPosition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/margin_user_stats"
+                        android:id="@+id/tvPositionHead"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="0"
-                        android:textSize="@dimen/text_size_user_stats" />
+                        android:text="Position" />
 
-                    <ImageView
-                        android:id="@+id/ivPositionUpDown"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="@dimen/margin_user_stats"
-                        android:src="@drawable/arrow_up" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvPosition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/margin_user_stats"
+                            android:gravity="center_horizontal"
+                            android:text="0"
+                            android:textSize="@dimen/text_size_user_stats" />
+
+                        <ImageView
+                            android:id="@+id/ivPositionUpDown"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/margin_user_stats"
+                            android:src="@drawable/arrow_up" />
+                    </LinearLayout>
+
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvAccHead"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="Accuracy" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvAcc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/margin_user_stats"
+                        android:id="@+id/tvAccHead"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="0%"
-                        android:textSize="@dimen/text_size_user_stats" />
+                        android:text="Accuracy" />
 
-                    <ImageView
-                        android:id="@+id/ivAccUpDown"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="@dimen/margin_user_stats"
-                        android:src="@drawable/arrow_up" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvAcc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/margin_user_stats"
+                            android:gravity="center_horizontal"
+                            android:text="0%"
+                            android:textSize="@dimen/text_size_user_stats" />
+
+                        <ImageView
+                            android:id="@+id/ivAccUpDown"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/margin_user_stats"
+                            android:src="@drawable/arrow_up" />
+                    </LinearLayout>
+
                 </LinearLayout>
-
             </LinearLayout>
+
         </LinearLayout>
-
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

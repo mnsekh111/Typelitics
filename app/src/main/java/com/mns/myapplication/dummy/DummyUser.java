@@ -24,6 +24,53 @@ public class DummyUser {
         this.id = nextId++;
     }
 
+    public int getAvgWPM(){
+        int totWPM=0,totRaces=0;
+        for(int i=0;i<DummyRaceStats.getList().size();i++){
+            if(DummyRaceStats.getList().get(i).racers.containsKey(this)){
+                totRaces++;
+                totWPM+=DummyRaceStats.getList().get(i).racers.get(this).wpm;
+            }
+        }
+
+        try {
+            return totWPM / totRaces;
+        }catch (RuntimeException re){
+            return 0;
+        }
+    }
+
+    public int getAvgAcc(){
+        int totAcc=0,totRaces=0;
+        for(int i=0;i<DummyRaceStats.getList().size();i++){
+            if(DummyRaceStats.getList().get(i).racers.containsKey(this)){
+                totRaces++;
+                totAcc+=DummyRaceStats.getList().get(i).racers.get(this).acc;
+            }
+        }
+
+        try {
+            return totAcc / totRaces;
+        }catch (RuntimeException re){
+            return 0;
+        }
+    }
+
+    public int getAvgPos(){
+        int totPos=0,totRaces=0;
+        for(int i=0;i<DummyRaceStats.getList().size();i++){
+            if(DummyRaceStats.getList().get(i).racers.containsKey(this)){
+                totRaces++;
+                totPos+=DummyRaceStats.getList().get(i).racers.get(this).pos;
+            }
+        }
+
+        try {
+            return totPos / totRaces;
+        }catch (RuntimeException re){
+            return 0;
+        }
+    }
     public static ArrayList<DummyUser> getList(){
         if(list == null){
             list = new ArrayList<>(TOT_USERS);
