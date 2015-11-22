@@ -25,11 +25,12 @@ public class ResultActivity extends Activity {
     int gameId = -1;
     Button btnNewRace;
     private LinearLayout llResult;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
-        gameId = i.getIntExtra("gameid",2);
+        gameId = i.getIntExtra("gameid", 2);
         setContentView(R.layout.activity_result);
         initViews();
 
@@ -56,21 +57,26 @@ public class ResultActivity extends Activity {
                 ImageView ivPosUpDown = (ImageView) l.findViewById(R.id.ivPositionUpDown);
                 ImageView ivAccUpDown = (ImageView) l.findViewById(R.id.ivAccUpDown);
 
-                tvWPM.setText(""+racers.get(user).wpm);
-                tvPos.setText(""+racers.get(user).pos);
+                civPP.setVisibility(View.VISIBLE);
+                ivWPMUpDown.setVisibility(View.VISIBLE);
+                ivPosUpDown.setVisibility(View.VISIBLE);
+                ivAccUpDown.setVisibility(View.VISIBLE);
+
+                tvWPM.setText("" + racers.get(user).wpm);
+                tvPos.setText("" + racers.get(user).pos);
                 tvAcc.setText("" + racers.get(user).acc);
 
                 Picasso.with(this).load(user.profilePic).into(civPP);
 
 
-                if(user.getAvgAcc() > racers.get(user).wpm)
+                if (user.getAvgAcc() > racers.get(user).wpm)
                     ivWPMUpDown.setImageResource(R.drawable.arrow_down);
-                if(user.getAvgAcc() > racers.get(user).pos)
+                if (user.getAvgAcc() > racers.get(user).pos)
                     ivPosUpDown.setImageResource(R.drawable.arrow_down);
-                if(user.getAvgAcc() > racers.get(user).acc)
+                if (user.getAvgAcc() > racers.get(user).acc)
                     ivAccUpDown.setImageResource(R.drawable.arrow_down);
             }
-        }catch(NullPointerException ne){
+        } catch (NullPointerException ne) {
             ne.printStackTrace();
         }
 
