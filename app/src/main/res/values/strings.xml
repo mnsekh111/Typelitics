@@ -47,6 +47,10 @@ the horizons for the young, gifted, and black</string>
     <string name="cancel">Cancel</string>
     <string name="progress_body">Please wait while we are finding your opponents. Click Cancel to go back.</string>
 
+    <string name="statsPosVsGame">Pos</string>
+    <string name="statsWPMVsGame">WPM</string>
+    <string name="statsAccVsGame">Acc</string>
+
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
