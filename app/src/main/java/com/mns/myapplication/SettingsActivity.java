@@ -1,5 +1,6 @@
 package com.mns.myapplication;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -7,8 +8,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class SettingsActivity extends PreferenceActivity {
-
-    private SharedPreferences prefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -18,10 +17,9 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
 
-    public Settings getPreferences() {
+    public static Settings getPreferences(Context context) {
         Settings s = new Settings();
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         s.auto_complete = prefs.getBoolean("auto_complete", false);
         s.auto_correct = prefs.getBoolean("auto_correct", false);
         s.suggest = prefs.getBoolean("suggest", false);
@@ -39,7 +37,7 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     private void logPrefs(){
-        Settings s = getPreferences();
+        Settings s = getPreferences(this);
         Log.i("Pref","Auto Complete "+s.auto_complete);
         Log.i("Pref","Auto Correct  "+s.auto_correct);
         Log.i("Pref","Suggest "+s.suggest);
