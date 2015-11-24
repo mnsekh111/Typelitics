@@ -6,14 +6,31 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.ListView;
 
 public class SettingsActivity extends PreferenceActivity {
 
+    private Button btnKeyBoard;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.user_settings);
-        logPrefs();
+        ListView v = getListView();
+        v.addFooterView(btnKeyBoard = new Button(this));
+        btnKeyBoard.setText(getString(R.string.keyboard_summary));
+        btnKeyBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager ime = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (ime != null) {
+                    ime.showInputMethodPicker();
+                }
+
+            }
+        });
     }
 
 
@@ -23,7 +40,6 @@ public class SettingsActivity extends PreferenceActivity {
         s.auto_complete = prefs.getBoolean("auto_complete", false);
         s.auto_correct = prefs.getBoolean("auto_correct", false);
         s.suggest = prefs.getBoolean("suggest", false);
-        s.keyboard = Integer.parseInt(prefs.getString("keyboard","0"));
 
         return s;
 

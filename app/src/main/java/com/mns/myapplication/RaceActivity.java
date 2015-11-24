@@ -2,9 +2,11 @@ package com.mns.myapplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
+import android.app.ProgressDialog;
+import android.app.Service;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,31 +16,34 @@ import android.text.InputType;
 import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.github.lzyzsd.circleprogress.CircleProgress;
+import com.mns.myapplication.utils.SoftKeyboard;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class RaceActivity extends Activity {
 
-    private CustomEditText etInput;
+    private EditText etInput;
     private TextView tvPassage, tvWpm, tvPosition, tvAcc;
     private LinearLayout llRace;
     private LinearLayout llRace2;
+    private LinearLayout llRaceParent;
     private CardView cvPassage;
+    private ProgressDialog pd = null;
 
     private volatile int timeElapsed = 0;
     private int currentWord = 0;
@@ -49,34 +54,15 @@ public class RaceActivity extends Activity {
     private String passage;
     private Spannable spanText = null;
 
-    private ArrayList<LinearLayout> partProgress = new ArrayList<>();
+    private ArrayList<RelativeLayout> partProgress = new ArrayList<>();
     private ArrayList<LinearLayout> partProgress2 = new ArrayList<>();
     private ArrayList<Integer> partProgressColor = new ArrayList<>();
     private Random random = new Random();
 
 
-    public class CustomEditText extends EditText {
-        public CustomEditText(Context context) {
-            super(context);
-        }
+    private InputMethodManager im = null;
+    private SoftKeyboard softKeyboard;
 
-        public CustomEditText(Context context, AttributeSet attrs) {
-            super(context, attrs);
-        }
-
-        public boolean onKeyPreIme(int keyCode, KeyEvent event) {
-            if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                llRace.setVisibility(View.VISIBLE);
-                llRace2.setVisibility(View.GONE);
-            } else {
-
-                llRace.setVisibility(View.GONE);
-                llRace2.setVisibility(View.VISIBLE);
-            }
-
-            return true;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,11 +71,14 @@ public class RaceActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_race2);
+
+        im = (InputMethodManager) getSystemService(Service.INPUT_METHOD_SERVICE);
         initViews();
     }
 
     private void initViews() {
-        etInput = (CustomEditText) findViewById(R.id.etInput);
+        pd = new ProgressDialog(this);
+        etInput = (EditText) findViewById(R.id.etInput);
         etInput.addTextChangedListener(mInpWatcher);
         setupEditTextOptions(SettingsActivity.getPreferences(this));
 
@@ -101,31 +90,91 @@ public class RaceActivity extends Activity {
         cvPassage = (CardView) findViewById(R.id.cvPassage);
         llRace = (LinearLayout) findViewById(R.id.llRace);
         llRace2 = (LinearLayout) findViewById(R.id.llRace2);
+        llRaceParent = (LinearLayout) findViewById(R.id.llRaceParent);
 
-//        if (participants == -1) {
-//            ProgressDialog pd = new ProgressDialog(RaceActivity.this);
-//            pd.setCancelable(false);
-//            pd.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    dialog.dismiss();
-//                    RaceActivity.this.finish();
-//                }
-//            });
-//            pd.setMessage(getString(R.string.progress_body));
-//            pd.show();
-//        }
-        setPassage(getString(R.string.sample_passage));
-        setParticipants(5);
+
+        softKeyboard = new SoftKeyboard(llRaceParent, im);
+        softKeyboard.setSoftKeyboardCallback(new SoftKeyboard.SoftKeyboardChanged() {
+
+            @Override
+            public void onSoftKeyboardHide() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        llRace2.setVisibility(View.GONE);
+                        llRace.setVisibility(View.VISIBLE);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onSoftKeyboardShow() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        llRace2.setVisibility(View.VISIBLE);
+                        llRace.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
+
+        new FetchTask(pd).execute();
+    }
+
+
+    private class FetchTask extends AsyncTask<Void, Integer, Void> {
+
+        public FetchTask(ProgressDialog pd) {
+            super();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            pd.dismiss();
+            setPassage(getString(R.string.sample_passage));
+            setParticipants(4);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            if (participants == -1) {
+                pd.setCancelable(false);
+                pd.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        RaceActivity.this.finish();
+                    }
+                });
+                pd.setMessage(getString(R.string.progress_body));
+                pd.show();
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            for (int i = 1; i <= 40; i++) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
     }
 
 
     private void setupEditTextOptions(SettingsActivity.Settings settings) {
-
-        InputMethodManager ime = (InputMethodManager) this.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (ime != null) {
-            ime.showInputMethodPicker();
-        }
 
         if (etInput != null) {
 
@@ -198,12 +247,12 @@ public class RaceActivity extends Activity {
     private void addProgressBars() {
         if (llRace != null) {
             for (int i = 0; i < participants; i++) {
-                LinearLayout ll = (LinearLayout) ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress, null);
-                ll.setId(View.generateViewId());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.setMargins(0, 0, 0, 5);
-                llRace.addView(ll, params);
-                partProgress.add(ll);
+                RelativeLayout rl = (RelativeLayout) ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.template_user_progress, null);
+                rl.setId(View.generateViewId());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.setMargins(0, 0, 0, 20);
+                llRace.addView(rl, params);
+                partProgress.add(rl);
             }
 
         }
@@ -255,10 +304,10 @@ public class RaceActivity extends Activity {
         addProgressBars();
 
         partProgressColor.add(Color.BLUE);
-        partProgressColor.add(Color.CYAN);
-        partProgressColor.add(Color.GRAY);
-        partProgressColor.add(Color.GREEN);
-        partProgressColor.add(Color.MAGENTA);
+        partProgressColor.add(Color.BLUE);
+        partProgressColor.add(Color.BLUE);
+        partProgressColor.add(Color.BLUE);
+        partProgressColor.add(Color.BLUE);
 
     }
 
@@ -318,27 +367,20 @@ public class RaceActivity extends Activity {
         public void handleMessage(Message msg) {
             IconRoundCornerProgressBar rpb = null;
             CircleProgress cpb = null;
+            TextView rpbText = null;
             for (int i = 0; i < partProgress.size(); i++) {
                 rpb = (IconRoundCornerProgressBar) partProgress.get(i).findViewById(R.id.rcpb);
+                rpbText = (TextView) partProgress.get(i).findViewById(R.id.rcpbText);
                 rpb.setProgress(rpb.getProgress() + random.nextInt(3) + 1);
+                rpbText.setText("" + rpb.getProgress());
                 rpb.setProgressColor(partProgressColor.get(i));
+
+                cpb = (CircleProgress) partProgress2.get(i).findViewById(R.id.cpb);
+                cpb.setProgress((int) rpb.getProgress());
             }
-//
-//            for (int i = 0; i < partProgress2.size(); i++) {
-//                cpb = (CircleProgress) partProgress2.get(i).findViewById(R.id.cpb);
-//                cpb.setProgress(cpb.getProgress() + random.nextInt(3) + 1);
-//            }
-//
-//
-//            if (isKeyboardVisisble()) {
-//                rpb.setVisibility(View.GONE);
-//                cpb.setVisibility(View.VISIBLE);
-//            } else {
-//                rpb.setVisibility(View.VISIBLE);
-//                cpb.setVisibility(View.GONE);
-//            }
         }
     };
+
 
     @Override
     protected void onDestroy() {
@@ -347,17 +389,6 @@ public class RaceActivity extends Activity {
         }
 
         super.onDestroy();
-    }
-
-    private boolean isKeyboardVisisble() {
-        InputMethodManager imm = (InputMethodManager) RaceActivity.this
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        if (imm.isAcceptingText()) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 

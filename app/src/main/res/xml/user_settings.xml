@@ -28,12 +28,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Keyboards" >
-    <ListPreference
-        android:key="keyboard"
-        android:entries="@array/keyboards"
-        android:summary="@string/keyboard_summary"
-        android:entryValues="@array/keyboardsVals"
-        android:title="@string/keyboard" />
     </PreferenceCategory>
 
 </PreferenceScreen>

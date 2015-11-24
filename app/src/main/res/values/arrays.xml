@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="keyboards">
-        <item name="qwerty">Qwerty</item>
-        <item name="T9">T9 (Legacy)</item>
-        <item name="custom">Custom</item>
-    </string-array>
-
-    <string-array name="keyboardsVals">
-        <item name="qwerty">0</item>
-        <item name="T9">1</item>
-        <item name="custom">2</item>
-    </string-array>
 
     <array name="indicator_colors">
         <item>@color/primary</item>
