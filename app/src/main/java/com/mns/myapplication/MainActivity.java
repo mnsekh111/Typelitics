@@ -46,8 +46,7 @@ public class MainActivity extends Activity {
             }else if(id == R.id.btnSettings){
                 intent = new Intent(getBaseContext(),SettingsActivity.class);
             }else if(id == R.id.btnPractice){
-                intent = new Intent(getBaseContext(),ResultActivity.class);
-                intent.putExtra("gameid",10);
+
             }else if(id ==R.id.btnLeaderboard){
                 intent = new Intent(getBaseContext(),LeaderboardActivity.class);
             }else if(id == R.id.btnStats){

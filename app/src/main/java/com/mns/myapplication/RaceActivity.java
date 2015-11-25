@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -123,7 +125,6 @@ public class RaceActivity extends Activity {
         new FetchTask(pd).execute();
     }
 
-
     private class FetchTask extends AsyncTask<Void, Integer, Void> {
 
         public FetchTask(ProgressDialog pd) {
@@ -134,7 +135,7 @@ public class RaceActivity extends Activity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             pd.dismiss();
-            setPassage(getString(R.string.sample_passage));
+            setPassage(getString(R.string.sample_passage_small));
             setParticipants(4);
         }
 
@@ -231,7 +232,17 @@ public class RaceActivity extends Activity {
                         tvPassage.setTextColor(getResources().getColor(android.R.color.white));
                         tvPassage.setTextSize(30);
                         tvPassage.setText("Done !");
-
+                        Button btnProceed = (Button)cvPassage.findViewById(R.id.btnProceed);
+                        btnProceed.setVisibility(View.VISIBLE);
+                        btnProceed.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                                intent.putExtra("gameid", 10);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
                         hasCompleted = true;
 
                     }
