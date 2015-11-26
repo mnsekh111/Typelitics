@@ -8,4 +8,10 @@
         <item>@color/primary</item>
     </array>
 
+    <string-array name="keyboards">
+        <item>Qwerty</item>
+        <item>T9</item>
+        <item>Minuum</item>
+    </string-array>
+
 </resources>

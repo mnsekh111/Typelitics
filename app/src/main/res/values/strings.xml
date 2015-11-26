@@ -47,6 +47,8 @@ the horizons for the young, gifted, and black</string>
     <string name="no">No</string>
     <string name="cancel">Cancel</string>
     <string name="progress_body">Please wait while we are finding your opponents. Click Cancel to go back.</string>
+    <string name="progress_body_practice">Please wait while we fetch a paragraph for you.</string>
+
 
     <string name="statsPosVsGame">Pos</string>
     <string name="statsWPMVsGame">WPM</string>

@@ -35,7 +35,8 @@
             android:id="@+id/llRace2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="bottom"
+            android:gravity="bottom|center"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
         </LinearLayout>

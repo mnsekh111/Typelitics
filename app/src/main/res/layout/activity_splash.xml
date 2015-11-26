@@ -27,8 +27,8 @@
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
-        custom:circle_finished_color="@color/primary_dark"
-        custom:circle_unfinished_color="@android:color/white"
+        custom:circle_finished_color="@color/white"
+        custom:circle_unfinished_color="@color/primary_dark"
         custom:circle_text_color="@android:color/black"
         custom:circle_suffix_text="%"
         custom:circle_text_size="16sp"/>

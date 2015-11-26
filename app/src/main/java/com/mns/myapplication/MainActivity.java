@@ -7,10 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
     Button btnNewRace,btnSettings,btnPractice,btnLb,btnStats;
+    TextView tvGame,tvOnline;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +28,9 @@ public class MainActivity extends Activity {
         btnLb = (Button) findViewById(R.id.btnLeaderboard);
         btnStats = (Button) findViewById(R.id.btnStats);
 
+        tvGame = (TextView) findViewById(R.id.tvGames);
+        tvOnline = (TextView) findViewById(R.id.tvOnline);
+
         btnClickListener = new ButtonClickListener();
 
         btnSettings.setOnClickListener(btnClickListener);
@@ -34,7 +40,6 @@ public class MainActivity extends Activity {
         btnStats.setOnClickListener(btnClickListener);
 
     }
-
     private ButtonClickListener btnClickListener;
     private class ButtonClickListener implements View.OnClickListener{
         @Override
@@ -45,8 +50,10 @@ public class MainActivity extends Activity {
                 intent = new Intent(getBaseContext(),RaceActivity.class);
             }else if(id == R.id.btnSettings){
                 intent = new Intent(getBaseContext(),SettingsActivity.class);
+                intent.putExtra("practice",false);
             }else if(id == R.id.btnPractice){
-
+                intent = new Intent(getBaseContext(),RaceActivity.class);
+                intent.putExtra("practice",true);
             }else if(id ==R.id.btnLeaderboard){
                 intent = new Intent(getBaseContext(),LeaderboardActivity.class);
             }else if(id == R.id.btnStats){

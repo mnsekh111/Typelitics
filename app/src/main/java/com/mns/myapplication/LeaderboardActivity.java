@@ -2,47 +2,48 @@ package com.mns.myapplication;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import com.mns.myapplication.fragments.LeaderFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import github.chenupt.multiplemodel.viewpager.ModelPagerAdapter;
-import github.chenupt.multiplemodel.viewpager.PagerModelManager;
-import github.chenupt.springindicator.SpringIndicator;
-import github.chenupt.springindicator.viewpager.ScrollerViewPager;
 
 public class LeaderboardActivity extends FragmentActivity {
+    private Spinner sp = null;
 
-    ScrollerViewPager viewPager;
-    List list1,list2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
+        sp = (Spinner) findViewById(R.id.spinnerKeyboard);
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                addFragment();
+            }
 
-        list1 = new ArrayList();
-        list1.add("SHIT");
-        list1.add("SHIT");
-        list1.add("SHIT");
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+        addFragment();
+    }
 
-        list2 = new ArrayList();
-        list2.add("SHIT");
-        list2.add("SHIT");
-        list2.add("SHIT");
-
-        viewPager = (ScrollerViewPager) findViewById(R.id.view_pager);
-        SpringIndicator springIndicator = (SpringIndicator) findViewById(R.id.indicator);
-
-        PagerModelManager manager = new PagerModelManager();
-        manager.addCommonFragment(LeaderFragment.class, list1, list2);
-        ModelPagerAdapter adapter = new ModelPagerAdapter(getSupportFragmentManager(), manager);
-        viewPager.setAdapter(adapter);
-        viewPager.fixScrollSpeed();
-
-        springIndicator.setViewPager(viewPager);
+    private void addFragment() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                LeaderFragment frag = new LeaderFragment();
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.llFragContainer, frag);
+                ft.commit();
+            }
+        });
 
     }
 }

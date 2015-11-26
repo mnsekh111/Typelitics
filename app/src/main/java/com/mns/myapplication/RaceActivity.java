@@ -39,6 +39,8 @@ import java.util.Random;
 
 public class RaceActivity extends Activity {
 
+
+    private boolean isPractice = false;
     private EditText etInput;
     private TextView tvPassage, tvWpm, tvPosition, tvAcc;
     private LinearLayout llRace;
@@ -58,7 +60,6 @@ public class RaceActivity extends Activity {
 
     private ArrayList<RelativeLayout> partProgress = new ArrayList<>();
     private ArrayList<LinearLayout> partProgress2 = new ArrayList<>();
-    private ArrayList<Integer> partProgressColor = new ArrayList<>();
     private Random random = new Random();
 
 
@@ -73,7 +74,7 @@ public class RaceActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_race2);
-
+        isPractice = getIntent().getBooleanExtra("practice", false);
         im = (InputMethodManager) getSystemService(Service.INPUT_METHOD_SERVICE);
         initViews();
     }
@@ -135,8 +136,8 @@ public class RaceActivity extends Activity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             pd.dismiss();
-            setPassage(getString(R.string.sample_passage_small));
-            setParticipants(4);
+            setPassage(getString(R.string.sample_passage));
+            setParticipants();
         }
 
         @Override
@@ -152,7 +153,11 @@ public class RaceActivity extends Activity {
                         RaceActivity.this.finish();
                     }
                 });
-                pd.setMessage(getString(R.string.progress_body));
+                if(!isPractice)
+                    pd.setMessage(getString(R.string.progress_body));
+                else
+                    pd.setMessage(getString(R.string.progress_body_practice));
+
                 pd.show();
             }
         }
@@ -232,7 +237,7 @@ public class RaceActivity extends Activity {
                         tvPassage.setTextColor(getResources().getColor(android.R.color.white));
                         tvPassage.setTextSize(30);
                         tvPassage.setText("Done !");
-                        Button btnProceed = (Button)cvPassage.findViewById(R.id.btnProceed);
+                        Button btnProceed = (Button) cvPassage.findViewById(R.id.btnProceed);
                         btnProceed.setVisibility(View.VISIBLE);
                         btnProceed.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -310,15 +315,14 @@ public class RaceActivity extends Activity {
         }
     }
 
-    private void setParticipants(int n) {
-        this.participants = n;
-        addProgressBars();
+    private void setParticipants() {
 
-        partProgressColor.add(Color.BLUE);
-        partProgressColor.add(Color.BLUE);
-        partProgressColor.add(Color.BLUE);
-        partProgressColor.add(Color.BLUE);
-        partProgressColor.add(Color.BLUE);
+        if (isPractice) {
+            this.participants = 1;
+        } else {
+            this.participants = 4;
+        }
+        addProgressBars();
 
     }
 
@@ -384,7 +388,7 @@ public class RaceActivity extends Activity {
                 rpbText = (TextView) partProgress.get(i).findViewById(R.id.rcpbText);
                 rpb.setProgress(rpb.getProgress() + random.nextInt(3) + 1);
                 rpbText.setText("" + rpb.getProgress());
-                rpb.setProgressColor(partProgressColor.get(i));
+                rpb.setProgressColor(getResources().getColor(R.color.primary));
 
                 cpb = (CircleProgress) partProgress2.get(i).findViewById(R.id.cpb);
                 cpb.setProgress((int) rpb.getProgress());

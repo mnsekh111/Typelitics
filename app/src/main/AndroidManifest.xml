@@ -42,7 +42,8 @@
             android:exported="true" >
         </service>
 
-        <activity android:name=".LeaderboardActivity" >
+        <activity android:name=".LeaderboardActivity"
+            android:label="@string/leader_board">
         </activity>
         <activity android:name=".StatsActivity" >
         </activity>
