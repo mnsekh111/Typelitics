@@ -1,4 +1,4 @@
-package com.mns.myapplication.utils;
+package com.mns.typelytics.utils;
 
 /**
  * Created by mns on 11/24/15.

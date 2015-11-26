@@ -1,4 +1,4 @@
-package com.mns.myapplication.adapters;
+package com.mns.typelytics.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mns.myapplication.R;
-import com.mns.myapplication.pojo.LeaderBoardItem;
+import com.mns.typelytics.R;
+import com.mns.typelytics.pojo.LeaderBoardItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.mns.myapplication;
+package com.mns.typelytics;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
-import com.mns.myapplication.fragments.LeaderFragment;
+import com.mns.typelytics.fragments.LeaderFragment;
 
 
 public class LeaderboardActivity extends FragmentActivity {

@@ -1,4 +1,4 @@
-package com.mns.myapplication;
+package com.mns.typelytics;
 
 import android.content.Context;
 import android.content.SharedPreferences;

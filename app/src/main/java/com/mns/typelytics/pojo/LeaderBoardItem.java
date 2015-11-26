@@ -1,6 +1,6 @@
-package com.mns.myapplication.pojo;
+package com.mns.typelytics.pojo;
 
-import com.mns.myapplication.dummy.DummyUser;
+import com.mns.typelytics.dummy.DummyUser;
 
 import java.util.ArrayList;
 import java.util.Random;

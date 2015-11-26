@@ -1,6 +1,6 @@
-package com.mns.myapplication.dummy;
+package com.mns.typelytics.dummy;
 
-import com.mns.myapplication.SettingsActivity;
+import com.mns.typelytics.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

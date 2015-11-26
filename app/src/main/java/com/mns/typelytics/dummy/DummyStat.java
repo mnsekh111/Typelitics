@@ -1,4 +1,4 @@
-package com.mns.myapplication.dummy;
+package com.mns.typelytics.dummy;
 
 /**
  * Created by mns on 11/20/15.

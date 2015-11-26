@@ -1,4 +1,4 @@
-package com.mns.myapplication.fragments;
+package com.mns.typelytics.fragments;
 
 import android.support.v4.app.Fragment;
 import android.graphics.Color;
@@ -15,7 +15,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.mns.myapplication.R;
+import com.mns.typelytics.R;
 
 import java.util.ArrayList;
 

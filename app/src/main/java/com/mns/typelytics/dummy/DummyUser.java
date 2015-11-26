@@ -1,4 +1,4 @@
-package com.mns.myapplication.dummy;
+package com.mns.typelytics.dummy;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -86,6 +86,16 @@ public class DummyUser {
             list.add(new DummyUser("Person 9","https://upload.wikimedia.org/wikipedia/en/e/ef/Sean_Hood_Avatar,_Profile_Picture.jpg"));
         }
         return list;
+    }
+
+    public static DummyUser getUser(int id){
+        for(int i=0;i<DummyUser.getList().size();i++){
+            if(DummyUser.getList().get(i).id == id){
+                return DummyUser.getList().get(i);
+            }
+        }
+
+        return null;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.mns.myapplication;
+package com.mns.typelytics;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,7 +32,7 @@ import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.github.lzyzsd.circleprogress.CircleProgress;
-import com.mns.myapplication.utils.SoftKeyboard;
+import com.mns.typelytics.utils.SoftKeyboard;
 
 import java.util.ArrayList;
 import java.util.Random;

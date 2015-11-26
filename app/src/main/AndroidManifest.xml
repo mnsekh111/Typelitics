@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mns.myapplication" >
+    package="com.mns.typelytics" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -13,7 +13,7 @@
         android:windowSoftInputMode="adjustResize"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".SplashActivity"
+            android:name="com.mns.typelytics.SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
@@ -23,29 +23,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.mns.typelytics.MainActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Material.Light.NoActionBar" />
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.mns.typelytics.SettingsActivity"
             android:label="@string/settings" />
         <activity
-            android:name=".RaceActivity"
+            android:name="com.mns.typelytics.RaceActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Material.Light.NoActionBar" />
-        <activity android:name=".ResultActivity" >
+        <activity android:name="com.mns.typelytics.ResultActivity" >
         </activity>
 
         <service
-            android:name=".services.NetworkService"
+            android:name="com.mns.typelytics.services.NetworkService"
             android:enabled="true"
             android:exported="true" >
         </service>
 
-        <activity android:name=".LeaderboardActivity"
+        <activity android:name="com.mns.typelytics.LeaderboardActivity"
             android:label="@string/leader_board">
         </activity>
-        <activity android:name=".StatsActivity" >
+        <activity android:name="com.mns.typelytics.StatsActivity" >
         </activity>
     </application>
 

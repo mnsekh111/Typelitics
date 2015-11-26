@@ -1,4 +1,4 @@
-package com.mns.myapplication;
+package com.mns.typelytics;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

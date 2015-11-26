@@ -1,4 +1,4 @@
-package com.mns.myapplication;
+package com.mns.typelytics;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mns.myapplication.dummy.DummyRaceStats;
-import com.mns.myapplication.dummy.DummyStat;
-import com.mns.myapplication.dummy.DummyUser;
+import com.mns.typelytics.dummy.DummyRaceStats;
+import com.mns.typelytics.dummy.DummyStat;
+import com.mns.typelytics.dummy.DummyUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.Map;

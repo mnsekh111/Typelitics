@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mns.myapplication.fragments;
+package com.mns.typelytics.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,9 +26,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.mns.myapplication.R;
-import com.mns.myapplication.adapters.RecyclerViewAdapter;
-import com.mns.myapplication.pojo.LeaderBoardItem;
+import com.mns.typelytics.R;
+import com.mns.typelytics.adapters.RecyclerViewAdapter;
+import com.mns.typelytics.pojo.LeaderBoardItem;
 
 import java.util.List;
 

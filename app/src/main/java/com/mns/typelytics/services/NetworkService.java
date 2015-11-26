@@ -1,4 +1,4 @@
-package com.mns.myapplication.services;
+package com.mns.typelytics.services;
 
 import android.app.Service;
 import android.content.Intent;
