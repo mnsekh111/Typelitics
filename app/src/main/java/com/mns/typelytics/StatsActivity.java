@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mns.typelytics.dummy.DummyUser;
-import com.mns.typelytics.fragments.LeaderFragment;
 import com.mns.typelytics.fragments.Stats1Fragment;
+import com.mns.typelytics.fragments.Stats2Fragment;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -45,7 +45,7 @@ public class StatsActivity extends FragmentActivity {
         PagerModelManager manager = new PagerModelManager();
         //manager.addCommonFragment(Stats1Fragment.class, list1, list2);
         manager.addFragment(new Stats1Fragment(),getResources().getString(R.string.statsWPMVsGame));
-        manager.addFragment(new LeaderFragment(),getResources().getString(R.string.statsPosVsGame));
+        manager.addFragment(new Stats2Fragment(),getResources().getString(R.string.statsPosVsGame));
         manager.addFragment(new Stats1Fragment(),getResources().getString(R.string.statsAccVsGame));
         ModelPagerAdapter adapter = new ModelPagerAdapter(getSupportFragmentManager(), manager);
         viewPager.setAdapter(adapter);
@@ -63,5 +63,6 @@ public class StatsActivity extends FragmentActivity {
             tvAcc.setText(""+dm.getAvgAcc());
             Picasso.with(this).load(dm.profilePic).into(profile_image);
         }
+        getActionBar().setTitle(dm.name);
     }
 }

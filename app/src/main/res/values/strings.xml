@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Typlitics</string>
+    <string name="app_name">Typelytics</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -40,7 +40,9 @@ known in the streets, had committed himself several
 years ago to use his talents as a playwright to broaden
 the horizons for the young, gifted, and black</string>
     <string name="sample_passage_small">Clifford</string>
-
+    <string name="sample_passage_med">Clifford Jackson, or Abshu, as he preferred to be
+known in the streets, had committed himself several
+years ago to use his talents</string>
     <string name="quit">Exit race?</string>
     <string name="quit_mess">Do you really want to exit the race? All your stats will be lost</string>
     <string name="yes">Yes</string>
@@ -54,6 +56,6 @@ the horizons for the young, gifted, and black</string>
     <string name="statsWPMVsGame">WPM</string>
     <string name="statsAccVsGame">Acc</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

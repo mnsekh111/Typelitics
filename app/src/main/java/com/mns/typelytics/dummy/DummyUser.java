@@ -74,16 +74,16 @@ public class DummyUser {
     public static ArrayList<DummyUser> getList(){
         if(list == null){
             list = new ArrayList<>(TOT_USERS);
-            list.add(new DummyUser("Person 0","http://www.american.edu/uploads/profiles/large/chris_palmer_profile_11.jpg"));
-            list.add(new DummyUser("Person 1","https://upload.wikimedia.org/wikipedia/en/7/70/Shawn_Tok_Profile.jpg"));
-            list.add(new DummyUser("Person 2","http://organicthemes.com/demo/profile/files/2012/12/profile_img.png"));
-            list.add(new DummyUser("Person 3","http://www.likecool.com/Gear/Pic/One%20Trippy%20Profile%20Pic/One-Trippy-Profile-Pic.jpg"));
-            list.add(new DummyUser("Person 4","http://www.geek.com/wp-content/uploads/2010/07/Scott-Forstall-Executive-profile-image.jpg"));
-            list.add(new DummyUser("Person 5","https://media.cirrusmedia.com.au/LW_Media_Library/LW-603-p28-partner-profile.jpg"));
-            list.add(new DummyUser("Person 6","https://lh5.googleusercontent.com/-ZadaXoUTBfs/AAAAAAAAAAI/AAAAAAAAAGA/19US52OmBqc/photo.jpg"));
-            list.add(new DummyUser("Person 7","http://www.jobswolf.com/img/testimonials/1/profile.jpg"));
-            list.add(new DummyUser("Person 8","https://www.morganstanley.com/assets/images/people/tiles/karlene-quigley-large.jpg"));
-            list.add(new DummyUser("Person 9","https://upload.wikimedia.org/wikipedia/en/e/ef/Sean_Hood_Avatar,_Profile_Picture.jpg"));
+            list.add(new DummyUser("Cercei Blonde","http://www.american.edu/uploads/profiles/large/chris_palmer_profile_11.jpg"));
+            list.add(new DummyUser("Jamie Lower","https://upload.wikimedia.org/wikipedia/en/7/70/Shawn_Tok_Profile.jpg"));
+            list.add(new DummyUser("Varys Spider","http://organicthemes.com/demo/profile/files/2012/12/profile_img.png"));
+            list.add(new DummyUser("Baelish Finger","http://www.likecool.com/Gear/Pic/One%20Trippy%20Profile%20Pic/One-Trippy-Profile-Pic.jpg"));
+            list.add(new DummyUser("Cat Star","http://www.geek.com/wp-content/uploads/2010/07/Scott-Forstall-Executive-profile-image.jpg"));
+            list.add(new DummyUser("Denny Targy","https://media.cirrusmedia.com.au/LW_Media_Library/LW-603-p28-partner-profile.jpg"));
+            list.add(new DummyUser("Trion Impman","https://lh5.googleusercontent.com/-ZadaXoUTBfs/AAAAAAAAAAI/AAAAAAAAAGA/19US52OmBqc/photo.jpg"));
+            list.add(new DummyUser("Maggie Tyrell","http://www.jobswolf.com/img/testimonials/1/profile.jpg"));
+            list.add(new DummyUser("Jeffry Batminton","https://www.morganstanley.com/assets/images/people/tiles/karlene-quigley-large.jpg"));
+            list.add(new DummyUser("Cal Dragon","https://upload.wikimedia.org/wikipedia/en/e/ef/Sean_Hood_Avatar,_Profile_Picture.jpg"));
         }
         return list;
     }
@@ -96,6 +96,18 @@ public class DummyUser {
         }
 
         return null;
+    }
+
+    public static ArrayList<DummyUser> getNRandomUsers(int n){
+        Random ran = new Random();
+        ArrayList<DummyUser> sample = new ArrayList<>();
+
+        int start_index = ran.nextInt(DummyUser.getList().size());
+        for (int i = 0; i < DummyUser.getList().size(); i++) {
+            DummyUser d = DummyUser.getList().get((start_index+i) % DummyUser.getList().size());
+            sample.add(d);
+        }
+        return sample;
     }
 
 }

@@ -71,22 +71,17 @@ public class Stats1Fragment extends Fragment {
         // set an alternative background color
         mChart.setBackgroundColor(Color.LTGRAY);
 
-        // add data
         setData(20, 30);
 
         mChart.animateX(2500);
 
-
-        // get the legend (only possible after setting data)
         Legend l = mChart.getLegend();
 
-        // modify the legend ...
-        // l.setPosition(LegendPosition.LEFT_OF_CHART);
         l.setForm(Legend.LegendForm.LINE);
         l.setTextSize(11f);
         l.setTextColor(Color.WHITE);
         l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
-//        l.setYOffset(11f);
+
 
         XAxis xAxis = mChart.getXAxis();
         xAxis.setTextSize(12f);
@@ -130,7 +125,6 @@ public class Stats1Fragment extends Fragment {
             yVals1.add(new Entry(val, i));
         }
 
-        // create a dataset and give it a type
         LineDataSet set1 = new LineDataSet(yVals1, "DataSet 1");
         set1.setAxisDependency(YAxis.AxisDependency.LEFT);
         set1.setColor(ColorTemplate.getHoloBlue());
@@ -141,18 +135,12 @@ public class Stats1Fragment extends Fragment {
         set1.setFillColor(ColorTemplate.getHoloBlue());
         set1.setHighLightColor(Color.rgb(244, 117, 117));
         set1.setDrawCircleHole(false);
-        //set1.setFillFormatter(new MyFillFormatter(0f));
-//        set1.setDrawHorizontalHighlightIndicator(false);
-//        set1.setVisible(false);
-//        set1.setCircleHoleColor(Color.WHITE);
 
         ArrayList<Entry> yVals2 = new ArrayList<Entry>();
 
         for (int i = 0; i < count; i++) {
             float mult = range;
             float val = (float) (Math.random() * mult) + 450;// + (float)
-            // ((mult *
-            // 0.1) / 10);
             yVals2.add(new Entry(val, i));
         }
 

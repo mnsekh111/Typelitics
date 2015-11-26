@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="wrap_content"
-    android:id="@+id/rl_temp_userProgress">
+    android:id="@+id/rl_temp_userProgress"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
 
     <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+        android:id="@+id/rcpb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:id="@+id/rcpb"
+        app:rcBackgroundColor="@android:color/white"
+        app:rcBackgroundPadding="5dp"
         app:rcIconPadding="2dp"
         app:rcIconSize="35dp"
         app:rcIconSrc="@android:drawable/stat_sys_headset"
-        app:rcBackgroundPadding="5dp"
-        app:rcBackgroundColor="@android:color/white"
-        app:rcProgressColor="@android:color/black"
+        app:rcMax="100"
         app:rcProgress="0"
-        app:rcMax="100"  />
+        app:rcProgressColor="@android:color/black" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_alignParentTop="true"
+        android:id="@+id/tvNameRCP"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text=""></TextView>
+
+    <TextView
         android:id="@+id/rcpbText"
-        android:gravity="center"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center" />
 
 </RelativeLayout>

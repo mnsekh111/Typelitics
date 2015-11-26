@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.github.lzyzsd.circleprogress.CircleProgress;
+import com.mns.typelytics.dummy.DummyUser;
 import com.mns.typelytics.utils.SoftKeyboard;
 
 import java.util.ArrayList;
@@ -60,6 +61,7 @@ public class RaceActivity extends Activity {
 
     private ArrayList<RelativeLayout> partProgress = new ArrayList<>();
     private ArrayList<LinearLayout> partProgress2 = new ArrayList<>();
+    private ArrayList<DummyUser> racers = null;
     private Random random = new Random();
 
 
@@ -123,6 +125,7 @@ public class RaceActivity extends Activity {
             }
         });
 
+
         new FetchTask(pd).execute();
     }
 
@@ -153,7 +156,7 @@ public class RaceActivity extends Activity {
                         RaceActivity.this.finish();
                     }
                 });
-                if(!isPractice)
+                if (!isPractice)
                     pd.setMessage(getString(R.string.progress_body));
                 else
                     pd.setMessage(getString(R.string.progress_body_practice));
@@ -319,9 +322,12 @@ public class RaceActivity extends Activity {
 
         if (isPractice) {
             this.participants = 1;
+
         } else {
             this.participants = 4;
         }
+
+        racers = DummyUser.getNRandomUsers(participants);
         addProgressBars();
 
     }
@@ -383,15 +389,23 @@ public class RaceActivity extends Activity {
             IconRoundCornerProgressBar rpb = null;
             CircleProgress cpb = null;
             TextView rpbText = null;
+            TextView rpbNameText = null;
+            TextView cpbNameText = null;
+
             for (int i = 0; i < partProgress.size(); i++) {
                 rpb = (IconRoundCornerProgressBar) partProgress.get(i).findViewById(R.id.rcpb);
                 rpbText = (TextView) partProgress.get(i).findViewById(R.id.rcpbText);
+                rpbNameText = (TextView) partProgress.get(i).findViewById(R.id.tvNameRCP);
+                rpbNameText.setText(racers.get(i).name);
+
                 rpb.setProgress(rpb.getProgress() + random.nextInt(3) + 1);
-                rpbText.setText("" + rpb.getProgress());
+                rpbText.setText("" + rpb.getProgress() + "%");
                 rpb.setProgressColor(getResources().getColor(R.color.primary));
 
                 cpb = (CircleProgress) partProgress2.get(i).findViewById(R.id.cpb);
                 cpb.setProgress((int) rpb.getProgress());
+                cpbNameText = (TextView) partProgress2.get(i).findViewById(R.id.tvNameCPB);
+                cpbNameText.setText(racers.get(i).name);
             }
         }
     };

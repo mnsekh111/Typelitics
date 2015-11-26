@@ -42,6 +42,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         //Setting text view title
         customViewHolder.textView.setText(leaderBoardItem.getName());
+        customViewHolder.tvWPM.setText(""+leaderBoardItem.getAvgWPM());
+        customViewHolder.tvRank.setText(""+(i+1));
     }
 
     @Override
@@ -52,11 +54,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class CustomViewHolder extends RecyclerView.ViewHolder {
         protected CircleImageView imageView;
         protected TextView textView;
+        protected TextView tvWPM;
+        protected TextView tvRank;
 
         public CustomViewHolder(View view) {
             super(view);
             this.imageView = (CircleImageView) view.findViewById(R.id.profile_image);
             this.textView = (TextView) view.findViewById(R.id.title);
+            this.tvRank = (TextView) view.findViewById(R.id.tvRank);
+            this.tvWPM = (TextView) view.findViewById(R.id.tvWPM2);
         }
     }
 }
